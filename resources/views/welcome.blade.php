@@ -3,7 +3,7 @@
 @section('content')
     @if (Auth::check())
         <?php $user = Auth::user(); ?>
-        {{ $user->name }}
+        @include('tasks.index', ['tasks' => $tasks])
     @else
         <div class="center jumbotron">
             <div class="text-center">
