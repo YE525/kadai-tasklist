@@ -47,7 +47,6 @@ class TasksController extends Controller
             'status' => $request->status,
             'content' => $request->content,
         ]); 
-       
 
         return redirect('/');
     }
