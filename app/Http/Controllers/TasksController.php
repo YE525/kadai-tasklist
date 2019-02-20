@@ -20,14 +20,9 @@ class TasksController extends Controller
                 'user' => $user,
                 'tasks' => $tasks,
             ];
-        
-            return view('welcome', $data);
         }
         
-        else {
-            return view('welcome', $data);
-        }
-        
+        return view('welcome', $data);
     }
 
     // getでtasks/createにアクセスされた場合の「新規登録画面表示処理」
@@ -59,15 +54,12 @@ class TasksController extends Controller
     // getでtasks/idにアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        if (\Auth::check()) {
-            $user = \Auth::id();
-            $task = Task::find($id);
-            if (\Auth::id() == $task->user_id)
-            {
+        $user = \Auth::id();
+        $task = Task::find($id);
+        if (\Auth::id() == $task->user_id){
                 return view('tasks.show', [
                     'task' => $task,
                 ]);
-            }
         }
         
         return redirect('/');
@@ -76,14 +68,13 @@ class TasksController extends Controller
     // getでtasks/id/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
-        if (\Auth::check()) {
-            $user = \Auth::id();
-            $task = Task::find($id);
-            if (\Auth::id() == $task->user_id){
+
+        $user = \Auth::id();
+        $task = Task::find($id);
+        if (\Auth::id() == $task->user_id){
                 return view('tasks.edit', [
                     'task' => $task,
                 ]);
-            }
         }
         
         return redirect('/');
@@ -108,12 +99,10 @@ class TasksController extends Controller
     // deleteでtasks/idにアクセスされた場合の「削除処理」
     public function destroy($id)
     {
-        if (\Auth::check()) {
-            $user = \Auth::id();
-            $task = Task::find($id);
-            if (\Auth::id() == $task->user_id){
+        $user = \Auth::id();
+        $task = Task::find($id);
+        if (\Auth::id() == $task->user_id){
                 $task->delete();
-            }
         }
         
         return redirect('/');
